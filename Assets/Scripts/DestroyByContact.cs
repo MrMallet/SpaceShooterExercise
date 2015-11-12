@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-//https://oc.unity3d.com/index.php/s/rna2inqWBBysn6l
+
 public class DestroyByContact : MonoBehaviour {
 
 	public GameObject explosion; 
@@ -19,14 +19,11 @@ public class DestroyByContact : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		//if (other.tag == "Boundary" || other.tag =="Enemy")
-		if(other.CompareTag("Boundary")|| other.CompareTag("Enemy")){
+		if (other.tag == "Boundary") {
 			return;
 		}
-		if (explosion != null) {
-			Instantiate (explosion, transform.position, transform.rotation);
-			
-		}
+
+		Instantiate (explosion, transform.position, transform.rotation);
 		if (other.tag == "Player") {
 			Instantiate (playerExplosion, other.transform.position, other.transform.rotation);
 			gameController.GameOver();
