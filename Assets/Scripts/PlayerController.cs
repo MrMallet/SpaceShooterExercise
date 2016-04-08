@@ -7,6 +7,8 @@ public class Boundary{
 }
 
 public class PlayerController : MonoBehaviour {
+
+	public GameObject[] bolts;
 	public float speed;
 	public Boundary boundary;
 	public float tilt;
@@ -18,20 +20,34 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody rb;
 	private float nextFire;
 	private AudioSource audioSource;
+	private int i;
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
 		audioSource = GetComponent<AudioSource>();
+		i=0;
+
 	}
 
 	void Update(){
-
+		shot = bolts[i];
 		if (Input.GetButton ("Fire1") && Time.time > nextFire) {
 			nextFire = Time.time + fireRate;
+
+			//changing the weapon will be done through the MYO here.
+			// or possibly bubbles with II III symbols or x2 x3 firerate
+			//shot = bolts[0];
 
 			Instantiate (shot, shotSpawn.position, shotSpawn.rotation);
 			audioSource.Play();
 		}
+		// if(Input.GetKeyDown(KeyCode.Space)){
+		// 	if(i<3)
+		// 		i++;
+		// 	else
+		// 		i=0;
+		//
+		// }
 	}
 
 	void FixedUpdate(){
